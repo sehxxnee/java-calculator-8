@@ -2,10 +2,12 @@ package calculator;
 
 import calculator.adapter.console.ConsoleController;
 import calculator.app.StringAddService;
+import calculator.support.ExceptionHandler;
 
 public class Application {
     public static void main(String[] args) {
-    	ConsoleController controller = new ConsoleController(new StringAddService());
-        controller.run();
+        ExceptionHandler.handle(() -> {
+            new ConsoleController(new StringAddService()).run();
+        });
     }
 }
