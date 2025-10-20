@@ -1,12 +1,16 @@
 package calculator.domain.calc;
 
+import calculator.domain.parse.Expression;
+import calculator.domain.parse.Tokenizer;
+import calculator.domain.value.Numbers;
+
 public final class StringAddCalculator {
     private StringAddCalculator() {}
 
     public static int calculate(String raw) {
-        // TODO: Expression, Tokenizer, Numbers 등 연결 예정
-        if (raw == null || raw.isBlank()) return 0;
-        // 임시 구현 (테스트용)
-        return 0;
+        var expression = Expression.of(raw);
+        if (expression.isEmpty()) return 0;
+        var tokens = Tokenizer.of(expression).tokens();
+        return Numbers.fromTokens(tokens).sum();
     }
 }
